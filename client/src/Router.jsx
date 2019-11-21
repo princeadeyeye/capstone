@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
+import Homepage from './components/main/Homepage'
 
 
-
-import Navigation from './components/Navigation'
-import Homepage from './components/Homepage'
-import Signin from './components/Signin'
+import Navigation from './components/main/Navigation'
+{/*import Signin from './components/Signin'
 import Register from './components/Register'
 import EditProfile from './components/EditProfile'
 import Feed from './components/Feed'
 import ShowArticle from './components/ShowArticle'
 import ShowGif from './components/ShowGif'
 import CommentArticle from './components/CommentArticle'
-import CommentGif from './components/CommentGif'
+import CommentGif from './components/CommentGif'*/}
 
 
 class Router extends Component {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Signin from './Signin';
 
 class Homepage extends Component {
     
