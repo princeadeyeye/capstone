@@ -1,25 +1,48 @@
 import React, { Component } from 'react';
+import './Signin.css'
 
 class Signin extends Component {
     
     render() {
         return (
-            <div class="container">
-			    <div class="col-lg-5 mx-auto my-5">
-		                  <form action="" method="post" class="form-box">
-		                    <h3 class="h4 text-black mb-4">Login</h3>
-		                    <div class="form-group">
-		                      <input type="text" class="form-control" placeholder="Email Addresss" />
-		                    </div>
-		                    <div class="form-group">
-		                      <input type="password" class="form-control" placeholder="Password" />
-		                    </div>
-		                    <div class="form-group">
-		                      <input type="submit" class=" form-control btn btn-primary btn-pill" value="Enter" />
-		                    </div>
-		                  </form>
-		             </div>
-    			</div>
+           
+			    <div class="container">
+			        <div class="row">
+			            <div class="col-lg-3 col-md-2"></div>
+			            <div class="col-lg-6 col-md-8 login-box">
+			                <div class="col-lg-12 login-key">
+			                    <i class="fa fa-key" aria-hidden="true"></i>
+			                </div>
+			                <div class="col-lg-12 login-title">
+			                    ADMIN PANEL
+			                </div>
+
+			                <div class="col-lg-12 login-form">
+			                    <div class="col-lg-12 login-form">
+			                        <form>
+			                            <div class="form-group">
+			                                <label class="form-control-label">USERNAME</label>
+			                                <input type="text" class="form-control" />
+			                            </div>
+			                            <div class="form-group">
+			                                <label class="form-control-label">PASSWORD</label>
+			                                <input type="password" class="form-control" i />
+			                            </div>
+
+			                            <div class="col-lg-12 loginbttm">
+			                                <div class="col-lg-6 login-btm login-text">
+			                                </div>
+			                                <div class="col-lg-6 login-btm login-button">
+			                                    <button type="submit" class="btn btn-outline-primary">LOGIN</button>
+			                                </div>
+			                            </div>
+			                        </form>
+			                    </div>
+			                </div>
+			                <div class="col-lg-3 col-md-2"></div>
+			            </div>
+			        </div>
+			      </div>
         );
     }
 }
