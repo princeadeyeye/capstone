@@ -22,6 +22,7 @@ class Router extends Component {
 	      			<Route exact path = "/" component = {Homepage} />
 	      			<Route exact path = "/signin" component = {Signin} />
 	      			<Route exact path = "/register" component = {Register} />
+	      			<Route exact path = "/navigation" component = {Navigation} />
 	      			{/*<Route exact path = "/" component = {EditProfile} />
 	      			<Route exact path = "/" component = {Feed} />
 	      			<Route exact path = "/" component = {ShowArticle} />
