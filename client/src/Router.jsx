@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Homepage from './components/main/Homepage'
-
-
 import Navigation from './components/main/Navigation'
-{/*import Signin from './components/Signin'
-import Register from './components/Register'
-import EditProfile from './components/EditProfile'
+import Signin from './components/auth/Signin'
+import Register from './components/auth/Register'
+{/*import EditProfile from './components/EditProfile'
 import Feed from './components/Feed'
 import ShowArticle from './components/ShowArticle'
 import ShowGif from './components/ShowGif'
@@ -22,9 +20,9 @@ class Router extends Component {
         		<Navigation />
         		<Switch>
 	      			<Route exact path = "/" component = {Homepage} />
-	      			{/*<Route exact path = "/" component = {Signin} />
-	      			<Route exact path = "/" component = {Register} />
-	      			<Route exact path = "/" component = {EditProfile} />
+	      			<Route exact path = "/signin" component = {Signin} />
+	      			<Route exact path = "/register" component = {Register} />
+	      			{/*<Route exact path = "/" component = {EditProfile} />
 	      			<Route exact path = "/" component = {Feed} />
 	      			<Route exact path = "/" component = {ShowArticle} />
 	      			<Route exact path = "/" component = {ShowGif} />
