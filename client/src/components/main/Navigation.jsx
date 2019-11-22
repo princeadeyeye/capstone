@@ -6,7 +6,7 @@ class Navigation extends Component {
     render() {
         return (
 		  <div>
-		    <div class="html-container">
+		    <div class="container">
 		      <div class="html-section">
 		        <div class="html-project">
 		          <div class="navigation">
@@ -45,7 +45,6 @@ class Navigation extends Component {
 			<noscript>     
 		      <div class="cyrcle-center">
 		        <div class="radial-cyrcle">
-		          
 		        </div>
 		      </div>
 			</noscript>

@@ -4,6 +4,9 @@ import Homepage from './components/main/Homepage'
 import Navigation from './components/main/Navigation'
 import Signin from './components/auth/Signin'
 import Register from './components/auth/Register'
+import Article from './components/articles/Article'
+import Profile from './components/users/Profile'
+
 {/*import EditProfile from './components/EditProfile'
 import Feed from './components/Feed'
 import ShowArticle from './components/ShowArticle'
@@ -17,13 +20,14 @@ class Router extends Component {
     render() {
         return (
         	<div>
-        		<Navigation />
         		<Switch>
 	      			<Route exact path = "/" component = {Homepage} />
 	      			<Route exact path = "/signin" component = {Signin} />
 	      			<Route exact path = "/register" component = {Register} />
 	      			<Route exact path = "/navigation" component = {Navigation} />
 	      			<Route exact path = "/signin" component = {Signin} />
+	      			<Route exact path = "/articles" component = {Article} />
+	      			<Route exact path = "/profile" component = {Profile} />
 	      			{/*<Route exact path = "/" component = {EditProfile} />
 	      			<Route exact path = "/" component = {Feed} />
 	      			<Route exact path = "/" component = {ShowArticle} />
