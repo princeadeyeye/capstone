@@ -45,6 +45,7 @@ clickSubmit = () => {
     render() {
     
         return (
+        	<div className='card'>
 				<div class="container">
 				    <div class="col-lg-5 mx-auto mb-1" >
 			                  <form action="" method="post" class="form-box">
@@ -123,6 +124,7 @@ clickSubmit = () => {
 			                
 						</div>
     			</div>
+    		</div>
         );
     }
 }

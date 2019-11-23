@@ -42,14 +42,15 @@ componentWillReceiveProps = (props) => {
           <div className='container mt-5 text-white'>
             <div className="col jumbotron bg-primary">
               <h1 className="display-4 text-uppercase"> {user.firstName} {user.lastName}</h1>
-              <button type="button" class="btn btn-secondary" aria-label="right Align">
-                <i class="fas fa-edit"></i>
+              <button type="button" className="btn btn-primary" aria-label="right Align">
+                <i className="fa fa-edit"></i>
               </button>
               <p className="lead text-white">Email: {user.email}</p>
               <p className="lead text-white">Role: {user.jobRole}</p>
-              <hr className="my-4" />
-               <p className="lead text-white">Department: {user.department}</p>
+              <p className="lead text-white">Department: {user.department}</p>
               <p className="lead text-white">Address: {user.address}</p>
+              <hr className="my-4" />
+               
              { 
               (user.jobRole === 'admin') &&
             ( <div className='row '>
