@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {createUser} from './api-auth';
-import { Link } from 'react-router-dom'
 
 class Register extends Component {
 

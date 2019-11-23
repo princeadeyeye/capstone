@@ -7,12 +7,7 @@ import Register from './components/auth/Register'
 import Article from './components/articles/Article'
 import Profile from './components/users/Profile'
 
-{/*import EditProfile from './components/EditProfile'
-import Feed from './components/Feed'
-import ShowArticle from './components/ShowArticle'
-import ShowGif from './components/ShowGif'
-import CommentArticle from './components/CommentArticle'
-import CommentGif from './components/CommentGif'*/}
+
 
 
 class Router extends Component {

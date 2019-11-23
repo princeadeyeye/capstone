@@ -1,12 +1,13 @@
 body {
-    background: #222D32;
+    background: blue;
     font-family: 'Roboto', sans-serif;
 }
 
 .login-box {
     margin-top: 75px;
     height: auto;
-    background: #1A2226;
+    background: #5d4ef3;
+    border-radius: 10%;
     text-align: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -33,6 +34,7 @@ body {
 .login-form {
     margin-top: 25px;
     text-align: left;
+    
 }
 
 input[type=text] {

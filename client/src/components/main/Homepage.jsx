@@ -1,14 +1,51 @@
 import React, { Component } from 'react';
 import './Homepage.css'
+import {signin} from '../auth/api-auth';
+import auth from '../auth/auth-helper';
+import { Redirect } from 'react-router-dom'
 
 class Homepage extends Component {
  
+state = {
+	email: '',
+    password: '',
+    error: '',
+    redirectToReferrer: false
+}
 
-    constructor(props) {
-        super(props);
-    }
+clickSubmit = (event) => {
 
+	const user = {
+		email: this.state.email || undefined,
+		password: this.state.password || undefined
+	}
+
+	signin(user)
+		.then((data) => {
+			if(data.error) {
+				this.setState({ error: data.error})
+			} else {
+				auth.authenticate(data, () => {
+					this.setState({ redirectToReferrer: true})
+				})
+			}
+		})
+		event.preventDefault();
+}
+
+handleChange = name => event => {
+	this.setState({[name]: event.target.value})
+}
     render() {
+    	const {from} = this.props.location.state || {
+		      from: {
+		        pathname: '/'
+		      }
+		    }
+		    const {redirectToReferrer} = this.state
+		    if (redirectToReferrer) {
+		      return (<Redirect to={from}/>)
+		    }
         return (
         		<div className="main-bg">
 			        <div className="box-conatiner">
@@ -28,31 +65,45 @@ class Homepage extends Component {
 			                        <form className="login100-form validate-form p-l-55 p-r-55 p-t-20">
 			                           
 			                            <div className="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-			                                <input className="input100" type="text" name="username" placeholder="Username" />
+			                                <input 
+			                                className="input100" 
+			                                type="text" name="email" 
+			                                placeholder="Email" 
+			                                value={this.state.email}
+			                                onChange={this.handleChange('email')}
+			                                />
 			                                <span className="focus-input100"></span>
 			                            </div>
 			                            <div className="wrap-input100 validate-input" data-validate="Please enter password">
-			                                <input className="input100" type="password" name="pass" placeholder="Password" />
+			                                <input className="input100" 
+			                                type="password" 
+			                                placeholder="Password" 
+			                                value={this.state.password}
+			                                onChange={this.handleChange('password')}
+			                                />
 			                                <span className="focus-input100"></span>
 			                            </div>
-			                            <div className="text-right p-t-13 p-b-23">
-			                                <span className="txt1">
-			                                    Forgot
-			                                </span>
-			                                <a href="#" className="txt2">
-			                                    Username / Password?
-			                                </a>
-			                            </div>
+			                            { this.state.error &&
+			                            	(<div class="alert alert-danger" role="alert">
+			                            	 	{this.state.error}
+			                            	</div>)
+			                            }
+			                            
+			                            <br />
+			                          
 			                            <div className="container-login100-form-btn">
-			                                <button className="login100-form-btn">
+			                                <button 
+			                                className="login100-form-btn"
+			                                onClick={this.clickSubmit}
+			                                >
 			                                    Sign in
 			                                </button>
 			                            </div>
-			                            <div className="flex-col-c p-t-140 p-b-40">
+			                            <div className="flex-col-c p-t-110 p-b-40">
 			                                <span className="txt1 p-b-9">
 			                                    Don’t have an account?
 			                                </span>
-			                                <a href="#" className="txt3">
+			                                <a href="/" className="txt3">
 			                                    Sign up now
 			                                </a>
 			                            </div>

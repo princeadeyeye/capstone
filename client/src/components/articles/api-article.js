@@ -117,6 +117,15 @@ const uncomment = (params, credentials, postId, comment) => {
     console.log(err)
   })
 }
+const list = () => {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/sample/articles', {
+    method: 'GET',
+    })
+    .then(response => {
+      return response.json()
+  })
+  .catch((err) => console.log(err))
+}
 
 export {
   listNewsFeed,
@@ -126,5 +135,6 @@ export {
   like,
   unlike,
   comment,
-  uncomment
+  uncomment,
+  list,
 }
