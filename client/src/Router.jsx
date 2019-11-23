@@ -20,9 +20,8 @@ class Router extends Component {
 	      			<Route exact path = "/signin" component = {Signin} />
 	      			<Route exact path = "/register" component = {Register} />
 	      			<Route exact path = "/navigation" component = {Navigation} />
-	      			<Route exact path = "/signin" component = {Signin} />
 	      			<Route exact path = "/articles" component = {Article} />
-	      			<Route exact path = "/profile" component = {Profile} />
+	      			<Route exact path = "/profile/:id" component = {Profile} />
 	      			{/*<Route exact path = "/" component = {EditProfile} />
 	      			<Route exact path = "/" component = {Feed} />
 	      			<Route exact path = "/" component = {ShowArticle} />

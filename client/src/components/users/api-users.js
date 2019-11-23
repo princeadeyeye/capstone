@@ -1,19 +1,5 @@
-const create = (user) => {
-	return fetch('/api/v1/users/', {
-		method: 'POST',
-		headers: {
-		'Accept': 'application/json',
-		'Content-Type': 'application/json'
-	},
-		body: JSON.stringify(user)
-	})
-		.then((response) => {
-		return response.json()
-	}).catch((err) => console.log(err))
-}
-
 const list = () => {
-	return fetch('/api/users/', {
+	return fetch('/api/v1/users/', {
 		method: 'GET',
 		})
 		.then(response => {
@@ -23,7 +9,7 @@ const list = () => {
 }
 
 const read = (params, credentials) => {
-	return fetch('/api/users/' + params.userId, {
+	return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/users/' + params.id, {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
@@ -32,7 +18,10 @@ const read = (params, credentials) => {
 			}
 	})
 		.then((response) => {
-	return response.json()
+			return response.json()
+	}).catch((err) => {
+			console.log(err)
+	})
 }
 
 const remove = (params, credentials) => {
@@ -50,4 +39,19 @@ const remove = (params, credentials) => {
 	})
 }
 
-export { create, list, read, update, remove }
+const update = (params, credentials, user) => {
+  return fetch('/api/users/' + params.userId, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + credentials.t
+    },
+    body: user
+  }).then((response) => {
+    return response.json()
+  }).catch((err) => {
+    console.log(err)
+  })
+}
+
+export { list, read, update, remove }

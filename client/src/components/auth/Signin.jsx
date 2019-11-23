@@ -8,6 +8,7 @@ class Signin extends Component {
 	state = {
 	email: '',
     password: '',
+    userId: '',
     error: '',
     redirectToReferrer: false
 }
@@ -19,14 +20,14 @@ clickSubmit = (event) => {
 	}
 
 	signin(user)
-		.then((data) => {
+		.then(({data}) => {
 			if(data.error) {
-				console.log(data.error)
+				console.log(data.error || undefined)
 				this.setState({ error: data.error})
 			} else {
 				console.log(data)
 				auth.authenticate(data, () => {
-					this.setState({ redirectToReferrer: true})
+					this.setState({ redirectToReferrer: true, userId : data.userId})
 				})
 			}
 		})
@@ -38,14 +39,10 @@ handleChange = name => event => {
 
 }
     render() {
-    	const {from} = this.props.location.state || {
-		      from: {
-		        pathname: '/'
-		      }
-		    }
+    
 		    const {redirectToReferrer} = this.state
 		    if (redirectToReferrer) {
-		      return (<Redirect to={from}/>)
+		      return (<Redirect to={"/profile/" + this.state.userId}/>)
 		    }
     
         return (

@@ -10,23 +10,37 @@ state = {
 	email: '',
     password: '',
     error: '',
-    redirectToReferrer: false
+    redirectToReferrer: false,
+    userId: '',
+    defaultPage: true
 }
 
+init = () => {
+	if(auth.isAuthenticated()) {
+		this.setState({ defaultPage: false})
+	} else {
+		this.setState({ defaultPage: true})
+	}
+}
+componentWillReceiveProps = () => {
+	this.init();
+}
+componentDidMount = () => {
+	this.init();
+}
 clickSubmit = (event) => {
-
 	const user = {
 		email: this.state.email || undefined,
 		password: this.state.password || undefined
 	}
 
 	signin(user)
-		.then((data) => {
-			if(data.error) {
+		.then(({data}) => {
+			if(data.error || undefined) {
 				this.setState({ error: data.error})
 			} else {
 				auth.authenticate(data, () => {
-					this.setState({ redirectToReferrer: true})
+					this.setState({ redirectToReferrer: true, userId: data.userId})
 				})
 			}
 		})
@@ -37,14 +51,10 @@ handleChange = name => event => {
 	this.setState({[name]: event.target.value})
 }
     render() {
-    	const {from} = this.props.location.state || {
-		      from: {
-		        pathname: '/'
-		      }
-		    }
-		    const {redirectToReferrer} = this.state
+  		const {userId} = this.state
+  		 const {redirectToReferrer} = this.state
 		    if (redirectToReferrer) {
-		      return (<Redirect to={from}/>)
+		      return (<Redirect to={"/profile/" + userId}/>)
 		    }
         return (
         		<div className="main-bg">

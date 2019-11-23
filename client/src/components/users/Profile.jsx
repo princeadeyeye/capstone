@@ -1,66 +1,65 @@
 import React, { Component } from 'react';
+import auth from '../auth/auth-helper'
+import {read} from './api-users'
 
 class Profile extends Component {
+
+  constructor({match}) {
+    super()
+    this.state = {
+      user: {},
+      redirectToSignin: false,
+      feed:[]
+    }
+    this.match = match
+  }
+
+  init = (id) => {
+    const jwt = auth.isAuthenticated()
+    read({
+      id
+    }, {t:jwt.token}).then(({data}) => {
+      if (data.error) {
+        this.setState({ redirectToSignin: true})
+        console.log(data)
+      } else {
+        this.setState({ user: data})
+       
+      }
+    })
+  }
+
+componentWillReceiveProps = (props) => {
+    this.init(props.match.params.id)
+  }
+  componentDidMount = () => {
+    this.init(this.match.params.id)
+  }
   
     render() {
+      const {user} = this.state
         return (
-            <div class="background">
-<div class="profile-card">
-  <div class="cover"></div>
-  <div class="profile">
-    <div class="pic"></div>
-    <div class="above-fold">
-      <div class="name">
-        Douwe de Vries
-      </div>
-      <div class="role">
-        UX Engineer
-      </div>
-      <div class="location">
-        <i class="fas fa-map-marker-alt"></i>Gouda, the Netherlands
-      </div>
-      <div class="row">
-        <div class="button">
-          FOLLOW
-        </div>
-        <div class="button">
-          MESSAGE
-        </div>
-      </div>
-    </div>
-    <div class="below-fold">
-      <div class="about">
-        <h3>
-          About
-        </h3>
-        <p>
-          Hi, I am Douwe de Vries, 28 summers young and I am passionate about User Experiences, Design, Front-end development and game development. Like to talk about any of these things? Shoot me a message!
-        </p>
-      </div>
-      <div class="row stats">
-        <div class="stat">
-          <label>Posts</label>
-          <div class="num">
-            956
+          <div className='container mt-5 text-white'>
+            <div className="col jumbotron bg-primary">
+              <h1 className="display-4 text-uppercase"> {user.firstName} {user.lastName}</h1>
+              <button type="button" class="btn btn-secondary" aria-label="right Align">
+                <i class="fas fa-edit"></i>
+              </button>
+              <p className="lead text-white">Email: {user.email}</p>
+              <p className="lead text-white">Role: {user.jobRole}</p>
+              <hr className="my-4" />
+               <p className="lead text-white">Department: {user.department}</p>
+              <p className="lead text-white">Address: {user.address}</p>
+             { 
+              (user.jobRole === 'admin') &&
+            ( <div className='row '>
+                <a className="m-auto btn btn-primary btn-lg text-uppercase" href="/" role="button">Add Employee</a>
+                </div>)}
+            <div className='row '>
+                <a className="m-auto btn btn-primary btn-lg text-uppercase" href="/" role="button">Feed</a>
+                </div>
+            </div>
           </div>
-        </div>
-        <div class="stat">
-          <label>Followers</label>
-          <div class="num">
-            312
-          </div>
-        </div>
-        <div class="stat">
-          <label>Following</label>
-          <div class="num">
-            104
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
         );
     }
 }
