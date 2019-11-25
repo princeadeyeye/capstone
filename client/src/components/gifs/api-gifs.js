@@ -1,5 +1,5 @@
-const create = (params, credentials, post) => {
-  return fetch('/api/posts/new/'+ params.userId, {
+const create = (credentials, post ) => {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs/', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -13,9 +13,9 @@ const create = (params, credentials, post) => {
   })
 }
 
-const listByUser = (params, credentials) => {
-  return fetch('/api/posts/by/'+ params.userId, {
-    method: 'GET',
+const update = (params, credentials) => {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs/'+ params.userId, {
+    method: 'PATCH',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -26,8 +26,8 @@ const listByUser = (params, credentials) => {
   }).catch((err) => console.log(err))
 }
 
-const listNewsFeed = (params, credentials) => {
-  return fetch('/api/posts/feed/'+ params.userId, {
+const read = (params, credentials) => {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs/'+ params.userId, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -40,7 +40,7 @@ const listNewsFeed = (params, credentials) => {
 }
 
 const remove = (params, credentials) => {
-  return fetch('/api/posts/' + params.postId, {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs/' + params.postId, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
@@ -54,9 +54,9 @@ const remove = (params, credentials) => {
   })
 }
 
-const like = (params, credentials, postId) => {
-  return fetch('/api/posts/like/', {
-    method: 'PUT',
+const search = (params, credentials, postId) => {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs/?' + query.postId, {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -70,25 +70,10 @@ const like = (params, credentials, postId) => {
   })
 }
 
-const unlike = (params, credentials, postId) => {
-  return fetch('/api/posts/unlike/', {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + credentials.t
-    },
-    body: JSON.stringify({userId:params.userId, postId: postId})
-  }).then((response) => {
-    return response.json()
-  }).catch((err) => {
-    console.log(err)
-  })
-}
 
 const comment = (params, credentials, postId, comment) => {
-  return fetch('/api/posts/comment/', {
-    method: 'PUT',
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs/'+ params.userId +'/comment', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -102,9 +87,9 @@ const comment = (params, credentials, postId, comment) => {
   })
 }
 
-const uncomment = (params, credentials, postId, comment) => {
-  return fetch('/api/posts/uncomment/', {
-    method: 'PUT',
+const feeds = (params, credentials, postId, comment) => {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/feed/', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -116,15 +101,21 @@ const uncomment = (params, credentials, postId, comment) => {
   }).catch((err) => {
     console.log(err)
   })
+}
+const list = () => {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/sample/gifs', {
+    method: 'GET',
+    })
+    .then(response => {
+      return response.json()
+  })
+  .catch((err) => console.log(err))
 }
 
 export {
-  listNewsFeed,
-  listByUser,
   create,
   remove,
-  like,
-  unlike,
+  read,
   comment,
-  uncomment
+  list,
 }

@@ -21,8 +21,8 @@ clickSubmit = (event) => {
 
 	signin(user)
 		.then(({data}) => {
-			if(data.error) {
-				console.log(data.error || undefined)
+			if(data.error || undefined) {
+				console.log(data.error)
 				this.setState({ error: data.error})
 			} else {
 				console.log(data)
@@ -31,7 +31,8 @@ clickSubmit = (event) => {
 				})
 			}
 		})
-		event.preventDefault()
+				event.preventDefault()
+
 }
 
 handleChange = name => event => {
@@ -47,62 +48,23 @@ handleChange = name => event => {
     
         return (
            
-			    <div className="container">
-			        <div className="row">
-			            <div className="col-lg-3 col-md-2"></div>
-			            <div className="col-lg-6 col-md-8 login-box">
-			                <div className="col-lg-12 login-key">
-			                    <i className="fa fa-key" aria-hidden="true"></i>
-			                </div>
-			                <div className="col-lg-12 login-title">
-			                     LOGIN
-			                </div>
-
-			                <div className="col-lg-12 login-form">
-			                    <div className="col-lg-12 login-form">
-			                        <form>
-			                            <div className="form-group">
-			                                <label className="form-control-label">USERNAME</label>
-			                                <input 
-			                                type="text" 
-			                                className="form-control" 
-			                                 value={this.state.email}
-			                                onChange={this.handleChange('email')}
-			                                />
-			                            </div>
-			                            <div className="form-group">
-			                                <label className="form-control-label">PASSWORD</label>
-			                                <input 
-			                                type="password" 
-			                                className="form-control"  
-			                                value={this.state.password}
-			                                onChange={this.handleChange('password')}
-			                                />
-			                            </div>
-			                            	   { this.state.error &&
-			                            	(<div class="alert alert-danger" role="alert">
-			                            	 	{this.state.error}
-			                            	</div>)
-			                            }
-			                            <div className="col-lg-12 loginbttm">
-			                                <div className="col-lg-6 login-btm login-text">
-			                                </div>
-			                                <div className="col-lg-6 login-btm login-button">
-			                                    <button 
-			                                    type="submit" 
-			                                    className="btn btn-outline-primary"
-			                                    onClick={this.clickSubmit}
-			                                    >LOGIN</button>
-			                                </div>
-			                            </div>
-			                
-			                        </form>
-			                    </div>
-			                </div>
-			                <div className="col-lg-3 col-md-2"></div>
-			            </div>
-			        </div>
-			      </div>
+			   	<div class="w3">
+					<div class="signin-form profile">
+						<h3>Login</h3>
+						
+						<div class="login-form">
+							<form>
+								<input type="text" placeholder="E-mail"  value={this.state.email} onChange={this.handleChange('email')} required="" />
+								<input type="password" placeholder="Password" required="" value={this.state.password} onChange={this.handleChange('password')} />
+								<div class="tp">
+								{ this.state.error && (<div class="alert alert-danger" role="alert"> {this.state.error} </div>)}
+									<input type="submit" onClick={this.clickSubmit} />
+								</div>
+							</form>
+						</div>
+						<p><a href="/register"> Don't have an account?</a></p>
+					</div>
+		</div>
         );
     }
 }

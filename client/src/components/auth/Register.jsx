@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {createUser} from './api-auth';
+import './Register.css'
+import auth from './auth-helper'
 
 class Register extends Component {
 
@@ -22,7 +24,7 @@ handleChange = name => event => {
 	this.setState({ [name] : event.target.value })
 }
 
-clickSubmit = () => {
+clickSubmit = (event) => {
 	const user = {
 		firstName: this.state.firstName,
 	    lastName: this.state.lastName,
@@ -32,99 +34,45 @@ clickSubmit = () => {
 	    department: this.state.department,
 	    address: this.state.address
 	}
+    const jwt = auth.isAuthenticated()
+    createUser(jwt.token, user)
+    	.then(({data}) => {
+      if (data.error) {
+        this.setState({ error: data.error})
+      } else {
+        this.setState({ error: '', open: true })
+       
+      }
+    })
+    	event.preventDefault()
+  }
 
-	createUser(user).then((data) => {
-		if(data.error) {
-			this.setState({ error: data.error})
-		} else {
-			this.setState({ error: '', open : true })
-		}
-	})
-}
+	
 
     render() {
     
         return (
-        	<div className='card'>
-				<div class="container">
-				    <div class="col-lg-5 mx-auto mb-1" >
-			                  <form action="" method="post" class="form-box">
-			                    <h3 class="h4 text-black mb-4">Register </h3>
-			                    <div class="form-group">
-			                      <input 
-			                      type="text" 
-			                      className="form-control" 
-			                      placeholder="First Name" 
-			                      value= {this.state.firstName}
-			                      onChange={this.handleChange('firstName')}
-			                      />
-			                    </div>
-			                    <div class="form-group">
-			                      <input type="text" 
-			                      className="form-control" 
-			                      placeholder="Last Name" 
-			                      value= {this.state.lastName}
-			                      onChange={this.handleChange('lastName')}
-			                      />
-			                    </div>
-			                    <div class="form-group">
-			                      <input 
-			                      type="text" 
-			                      className="form-control" 
-			                      placeholder ="Email" 
-			                      value= {this.state.email}
-			                      onChange={this.handleChange('email')}
-			                      />
-			                    </div>
-			                    <div class="form-group">
-			                      <input 
-			                      type="password" 
-			                      className="form-control" 
-			                      placeholder ="Password" 
-			                      value= {this.state.password}
-			                      onChange={this.handleChange('password')}
-			                      />
-			                    </div>
-			                    <div class="form-group">
-			                      <input 
-			                      type="text" 
-			                      className="form-control" 
-			                      placeholder ="Job Role" 
-			                      value= {this.state.jobRole}
-			                      onChange={this.handleChange('jobRole')}
-			                      />
-			                    </div>
-			                    <div class="form-group">
-			                      <input 
-			                      type="text" 
-			                      className="form-control" 
-			                      placeholder ="Department" 
-			                      value= {this.state.department}
-			                      onChange={this.handleChange('department')}
-			                      />
-			                    </div>
-			                    <div class="form-group">
-			                      <input 
-			                      type="text" 
-			                      className="form-control" 
-			                      placeholder ="Address" 
-			                      value= {this.state.address}
-			                      onChange={this.handleChange('address')}
-			                      />
-			                    </div>
-			                    <div class="form-group">
-			                      <input 
-			                      type="submit" 
-			                      className="form-control btn btn-primary btn-pill" 
-			                      placeholder ="Enter" 
-			                      onClick={this.clickSubmit}
-			                      />
-			                    </div>
-			                  </form>
-			                
+        			<div className="agile">
+						<div className="signin-form profile">
+							<h3>Register</h3>
+							
+							<div className="login-form">
+								<form>
+									<input type="text" placeholder="First Name" required="" value={this.state.firstName} onChange={this.handleChange('firstName')} />
+									<input type="text" placeholder="Last Name" required="" value={this.state.lastName} onChange={this.handleChange('lastName')} />
+									<input type="text" placeholder="E-mail" required="" value={this.state.email} onChange={this.handleChange('email')} />
+									<input type="password" placeholder="Password" required="" value={this.state.password} onChange={this.handleChange('password')} />
+									<input type="text" placeholder="Department" required="" value={this.state.jobRole} onChange={this.handleChange('jobRole')} />
+									<input type="text" placeholder="Role" required="" value={this.state.department} onChange={this.handleChange('department')} />
+									<input type="text" placeholder="Address" required="" value={this.state.address} onChange={this.handleChange('address')} />
+									<input type="submit" onClick={this.clickSubmit} />
+									{ this.state.open && (<div className="alert alert-success" role="alert"> Account created successfully </div>)}
+
+								</form>
+							</div>
+							<p><a href="/signin">Have an account? Please, sign in.</a></p>
 						</div>
-    			</div>
-    		</div>
+		</div>
         );
     }
 }

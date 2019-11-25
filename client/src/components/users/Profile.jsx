@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import auth from '../auth/auth-helper'
 import {read} from './api-users'
+import {Link} from 'react-router-dom'
 
 class Profile extends Component {
 
@@ -54,7 +55,7 @@ componentWillReceiveProps = (props) => {
              { 
               (user.jobRole === 'admin') &&
             ( <div className='row '>
-                <a className="m-auto btn btn-primary btn-lg text-uppercase" href="/" role="button">Add Employee</a>
+                <Link className="m-auto btn btn-primary btn-lg text-uppercase" to="/register" role="button">Add Employee</Link>
                 </div>)}
             <div className='row '>
                 <a className="m-auto btn btn-primary btn-lg text-uppercase" href="/" role="button">Feed</a>

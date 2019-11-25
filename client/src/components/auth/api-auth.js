@@ -21,21 +21,22 @@ const signout = () => {
   }).catch((err) => console.log(err))
 }
 
-const createUser = (user, credentials) => {
-  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/auth/create-user/', {
+const createUser = ( credentials, user) => {
+  return fetch('http://adeyeyeteamwork.herokuapp.com/api/v1/auth/create-user/', {
     method: 'POST',
     headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ' + credentials.t
   },
+    mode: 'no-cors',
     body: JSON.stringify(user)
   })
     .then((response) => {
     return response.json()
   }).catch((err) => console.log(err))
 }
-
+/*
 const list = () => {
   return fetch('/api/users/', {
     method: 'GET',
@@ -60,6 +61,6 @@ const remove = (params, credentials) => {
     }).catch((err) => {
       console.log(err)
   })
-}
+}*/
 
-export { createUser, list, remove, signin, signout }
+export { createUser, signin, signout }
