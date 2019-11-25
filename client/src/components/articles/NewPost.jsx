@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import {create} from './api-article';
+import auth from '../auth/auth-helper';
 class NewPost extends Component {
 	state = {
 	    text: '',
@@ -36,15 +37,10 @@ class NewPost extends Component {
 	  }
     render() {
         return (
-            <div class="input-group mb-3">
-			  <div class="custom-file">
-			    <input type="file" class="custom-file-input" id="inputGroupFile02">
-			    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-			  </div>
-			  <div class="input-group-append">
-			    <span class="input-group-text" id="">Upload</span>
-			  </div>
-			</div>
+          <form>
+          	<input />
+          	<textarea> </textarea>
+          </form>
         );
     }
 }

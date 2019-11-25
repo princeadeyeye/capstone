@@ -1,4 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import {feeds} from './api-article';
+import auth from '../auth/auth-helper';
+import NewPost from './NewPost'
+import FeedList from './FeedList'
 
 class Feed extends Component {
 state = {
@@ -6,20 +10,17 @@ state = {
   }
   loadfeed = () => {
     const jwt = auth.isAuthenticated()
-    listfeed({
-      userId: jwt.user.userId
-    }, {
-      t: jwt.token
-    }).then((data) => {
+    feeds( { t: jwt.token }).then(({data}) => {
       if (data.error) {
         console.log(data.error)
       } else {
+        console.log(data)
         this.setState({feed: data})
       }
     })
   }
   componentDidMount = () => {
-    this.loadPosts()
+    this.loadfeed()
   }
   addPost = (post) => {
     const updatefeed = this.state.feed
@@ -37,9 +38,11 @@ state = {
    
     render() {
         return (
+            <div>
           <NewPost addPost={this.addPost} />
           <br />
           <FeedList removepost={this.removepost} feed={this.state.feed}/>
+            </div>
         );
     }
 }

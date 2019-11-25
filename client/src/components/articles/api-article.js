@@ -87,15 +87,14 @@ const comment = (params, credentials, postId, comment) => {
   })
 }
 
-const feeds = (params, credentials, postId, comment) => {
+const feeds = (credentials) => {
   return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/feed/', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + credentials.t
-    },
-    body: JSON.stringify({userId:params.userId, postId: postId, comment: comment})
+    }
   }).then((response) => {
     return response.json()
   }).catch((err) => {

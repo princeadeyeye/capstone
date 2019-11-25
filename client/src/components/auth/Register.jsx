@@ -34,8 +34,11 @@ clickSubmit = (event) => {
 	    department: this.state.department,
 	    address: this.state.address
 	}
+	event.preventDefault()
     const jwt = auth.isAuthenticated()
-    createUser(jwt.token, user)
+    console.log(jwt.token)
+    console.log(jwt.userId)
+    createUser(user, {t:jwt.token})
     	.then(({data}) => {
       if (data.error) {
         this.setState({ error: data.error})
@@ -44,13 +47,15 @@ clickSubmit = (event) => {
        
       }
     })
-    	event.preventDefault()
+    	
   }
 
 	
 
     render() {
-    
+    if (this.state.open) {
+    	return ( <h2>successfully Register</h2>)
+    }
         return (
         			<div className="agile">
 						<div className="signin-form profile">

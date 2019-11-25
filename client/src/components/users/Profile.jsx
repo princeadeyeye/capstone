@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import auth from '../auth/auth-helper'
 import {read} from './api-users'
 import {Link} from 'react-router-dom'
+import Feed from '../articles/Feed'
 
 class Profile extends Component {
 
@@ -41,6 +42,7 @@ componentWillReceiveProps = (props) => {
       const {user} = this.state
         return (
           <div className='container mt-5 text-white'>
+          <div className='row'>
             <div className="col jumbotron bg-primary">
               <h1 className="display-4 text-uppercase"> {user.firstName} {user.lastName}</h1>
               <button type="button" className="btn btn-primary" aria-label="right Align">
@@ -58,10 +60,14 @@ componentWillReceiveProps = (props) => {
                 <Link className="m-auto btn btn-primary btn-lg text-uppercase" to="/register" role="button">Add Employee</Link>
                 </div>)}
             <div className='row '>
-                <a className="m-auto btn btn-primary btn-lg text-uppercase" href="/" role="button">Feed</a>
+                <Link className="m-auto btn btn-primary btn-lg text-uppercase" to="/feed" role="button">Feed</Link>
                 </div>
             </div>
           </div>
+          <div className='row'>
+            <Feed />
+          </div>
+        </div>
         );
     }
 }
