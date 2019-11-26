@@ -41,7 +41,7 @@ componentWillReceiveProps = (props) => {
     render() {
       const {user} = this.state
         return (
-          <div className='container mt-5 text-white'>
+          <div className='container mt-5'>
           <div className='row'>
             <div className="col jumbotron bg-primary">
               <h1 className="display-4 text-uppercase"> {user.firstName} {user.lastName}</h1>
@@ -64,7 +64,7 @@ componentWillReceiveProps = (props) => {
                 </div>
             </div>
           </div>
-          <div className='row'>
+          <div className='row text-black'>
             <Feed />
           </div>
         </div>

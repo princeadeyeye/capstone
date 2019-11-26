@@ -5,7 +5,7 @@ class FeedList extends Component {
 
     render() {
         return (
-            <div class="card" style={{width: "18rem"}}>
+            <div class="card">
 			  {this.props.feed.map((item, i) => {
             return ( <Post 
             post={item} 

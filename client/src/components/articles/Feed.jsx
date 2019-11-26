@@ -38,10 +38,10 @@ state = {
    
     render() {
         return (
-            <div>
-          <NewPost addPost={this.addPost} />
-          <br />
-          <FeedList removepost={this.removepost} feed={this.state.feed}/>
+            <div className='card' style={{width: "50rem"}}>
+              <NewPost addPost={this.addPost} />
+              <br />
+              <FeedList removepost={this.removepost} feed={this.state.feed}/>
             </div>
         );
     }

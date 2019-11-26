@@ -37,10 +37,22 @@ class NewPost extends Component {
 	  }
     render() {
         return (
-          <form>
-          	<input />
-          	<textarea> </textarea>
-          </form>
+          <div class="media">
+			  <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+			    alt="Avatar" />
+			  <div class="media-body">
+			    <h5 class="mt-0 font-weight-bold blue-text">Anna Smith</h5>
+			    <div class="md-form amber-textarea active-amber-textarea">
+					  <i class="fas fa-pencil-alt prefix"></i>
+					  <textarea id="form22" class="md-textarea form-control" rows="3"></textarea>
+					<div class="row d-flex align-items-center">				
+				        <div class="text-center col-md-12 mt-3 mb-2">
+				          <button type="button" class="btn btn-success btn-block btn-rounded z-depth-1">Send</button>
+				        </div>
+					</div>
+			  </div>
+			</div>
+		</div>
         );
     }
 }
