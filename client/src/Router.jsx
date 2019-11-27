@@ -7,8 +7,8 @@ import Register from './components/auth/Register'
 import Article from './components/articles/Article'
 import Feed from './components/articles/Feed'
 import Profile from './components/users/Profile'
-
-
+import EditProfile from './components/users/EditProfile'
+import PrivateRoute from './components/auth/PrivateRoute'
 
 
 class Router extends Component {
@@ -24,6 +24,8 @@ class Router extends Component {
 	      			<Route exact path = "/articles" component = {Article} />
 	      			<Route exact path = "/profile/:id" component = {Profile} />
 	      			<Route exact path = "/feed" component = {Feed} />
+	      			<PrivateRoute exact path="/profile/edit/:id" component={EditProfile}/>
+
 	      			{/*<Route exact path = "/" component = {Feed} />
 	      			<Route exact path = "/" component = {ShowArticle} />
 	      			<Route exact path = "/" component = {ShowGif} />

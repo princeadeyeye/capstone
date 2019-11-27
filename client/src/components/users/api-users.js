@@ -40,10 +40,11 @@ const remove = (params, credentials) => {
 }
 
 const update = (params, credentials, user) => {
-  return fetch('/api/users/' + params.userId, {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/users/' + params.id, {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + credentials.t
     },
     body: user

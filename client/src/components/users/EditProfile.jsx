@@ -1,9 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import auth from '../auth/auth-helper'
+import {read, update} from './api-users'
+import {Link, Redirect} from 'react-router-dom'
 
 class EditProfile extends Component {
   
-   constructor(props) {
-	        super(props);
+   constructor({match}) {
+	        super();
 	        this.state = {
 	        	firstName: '',
 	        	lastName: '',
@@ -12,34 +15,59 @@ class EditProfile extends Component {
 	        	jobRole: '',
 	        	department: '',
 	        	address:'',
-	        	open: false,
+	        	redirectToProfile: false,
 	        	error:''
 
 	        }
+	        this.match = match
 	    }
+
+	    componentDidMount = () => {
+		    const jwt = auth.isAuthenticated()
+		    read({
+		      id: this.match.params.id
+		    }, {t: jwt.token}).then(({data}) => {
+		      if (data.error) {
+		        this.setState({error: data.error})
+		      } else {
+		      	console.log(data)
+		        this.setState({	id: data.userId, 
+		        				firstName: data.firstName, 
+		        				lastName: data.lastName, 
+		        				password: data.password,
+		        				email: data.email, 
+		        				jobRole: data.jobRole,
+		        				department: data.department,
+		        				address:data.address
+		        			})
+		      }
+		    })
+  }
 handleChange = name => event => {
 	this.setState({ [name] : event.target.value })
 }
 
 clickSubmit = (event) => {
 	const user = {
-		firstName: this.state.firstName,
-	    lastName: this.state.lastName,
-	    email: this.state.email,
-	    password: this.state.password,
-	    jobRole: this.state.jobRole,
-	    department: this.state.department,
-	    address: this.state.address
+		firstName: this.state.firstName || undefined,
+	    lastName: this.state.lastName || undefined,
+	    email: this.state.email || undefined,
+	    password: this.state.password || undefined,
+	    jobRole: this.state.jobRole || undefined,
+	    department: this.state.department || undefined,
+	    address: this.state.address || undefined
 	}
 event.preventDefault()
     const jwt = auth.isAuthenticated()
-    createUser({t:jwt.token}, user)
+    update(
+    	{id: this.match.params.id},
+    	{t:jwt.token}, user)
     	.then(({data}) => {
-      if (data.error) {
+      if (data.error || data===undefined) {
         this.setState({ error: data.error})
       } else {
 	console.log(data)
-        this.setState({ error: '', open: true })
+        this.setState({redirectToProfile: true })
        
       }
     })
@@ -48,11 +76,14 @@ event.preventDefault()
 	
 
     render() {
+    	if (this.state.redirectToProfile) {
+      return (<Redirect to={'/user/' + this.state.userid}/>)
+    }
     
         return (
         			<div className="agile">
 						<div className="signin-form profile">
-							<h3>Register</h3>
+							<h3>Update</h3>
 							
 							<div className="login-form">
 								<form>
@@ -64,11 +95,8 @@ event.preventDefault()
 									<input type="text" placeholder="Role" required="" value={this.state.department} onChange={this.handleChange('department')} />
 									<input type="text" placeholder="Address" required="" value={this.state.address} onChange={this.handleChange('address')} />
 									<input type="submit" onClick={this.clickSubmit} />
-									{ this.state.open && (<div className="alert alert-success" role="alert"> Account created successfully </div>)}
-
 								</form>
 							</div>
-							<p><a href="/signin">Have an account? Please, sign in.</a></p>
 						</div>
 		</div>
         );

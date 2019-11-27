@@ -3,6 +3,7 @@ import auth from '../auth/auth-helper'
 import {read} from './api-users'
 import {Link} from 'react-router-dom'
 import Feed from '../articles/Feed'
+import EditProfile from './EditProfile'
 
 class Profile extends Component {
 
@@ -23,8 +24,9 @@ class Profile extends Component {
     }, {t:jwt.token}).then(({data}) => {
       if (data.error) {
         this.setState({ redirectToSignin: true})
-        console.log(data)
       } else {
+                console.log(data)
+
         this.setState({ user: data})
        
       }
@@ -45,9 +47,9 @@ componentWillReceiveProps = (props) => {
           <div className='row'>
             <div className="col jumbotron bg-primary">
               <h1 className="display-4 text-uppercase"> {user.firstName} {user.lastName}</h1>
-              <button type="button" className="btn btn-primary" aria-label="right Align">
+              <Link to={'/profile/edit/' + user.userId} type="button" className="btn btn-primary" aria-label="right Align">
                 <i className="fa fa-edit"></i>
-              </button>
+              </Link>
               <p className="lead text-white">Email: {user.email}</p>
               <p className="lead text-white">Role: {user.jobRole}</p>
               <p className="lead text-white">Department: {user.department}</p>
@@ -61,7 +63,7 @@ componentWillReceiveProps = (props) => {
                 </div>)}
             <div className='row '>
                 <Link className="m-auto btn btn-primary btn-lg text-uppercase" to="/feed" role="button">Feed</Link>
-                </div>
+            </div>
             </div>
           </div>
           <div className='row text-black'>

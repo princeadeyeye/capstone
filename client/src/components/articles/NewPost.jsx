@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import {create} from './api-article';
 import auth from '../auth/auth-helper';
+
+
 class NewPost extends Component {
 	state = {
-	    text: '',
+		id:10,
+		title: '',
+	    article: '',
+	    authorId: '',
+	    createdOn: new Date(),
 	    photo: '',
-	    error: '',
-	    user: {}
+	    error: ''
 	  }
 
 	  componentDidMount = () => {
 	    this.postData = new FormData()
-	    this.setState({user: auth.isAuthenticated().user})
+	    this.setState({authorId: auth.isAuthenticated().userId})
+	    this.setState({ id: this.state.id + 1 });
 	  }
+
 	  clickPost = () => {
 	    const jwt = auth.isAuthenticated()
 	    create({
@@ -23,7 +30,13 @@ class NewPost extends Component {
 	      if (data.error) {
 	        this.setState({error: data.error})
 	      } else {
-	        this.setState({text:'', photo: ''})
+	        this.setState({	title: '',
+						    article: '',
+						    authorId: '',
+						    createdOn: '',
+						    photo: '',
+						    error: ''
+						})
 	        this.props.addUpdate(data)
 	      }
 	    })
@@ -37,23 +50,51 @@ class NewPost extends Component {
 	  }
     render() {
         return (
-          <div class="media">
-			  <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+      	<form>
+          <div className = "media">
+			  <img className = "d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
 			    alt="Avatar" />
-			  <div class="media-body">
-			    <h5 class="mt-0 font-weight-bold blue-text">Anna Smith</h5>
-			    <div class="md-form amber-textarea active-amber-textarea">
-					  <i class="fas fa-pencil-alt prefix"></i>
-					  <textarea id="form22" class="md-textarea form-control" rows="3"></textarea>
-					<div class="row d-flex align-items-center">				
-				        <div class="text-center col-md-12 mt-3 mb-2">
-				          <button type="button" class="btn btn-success btn-block btn-rounded z-depth-1">Send</button>
+			  <div className = "media-body">
+			    <h5 className = "mt-0 font-weight-bold blue-text">Anna Smith</h5>
+			    <div className = "md-form amber-textarea active-amber-textarea">
+				    <input 
+				    	className="form-control form-control-sm" 
+				    	type="text" 
+				    	placeholder="title" 
+				    	value={this.state.title}
+	            		 onChange={this.handleChange('title')}
+				    	/>
+					<textarea   
+						  id="form22" 
+						  className = "md-textarea form-control" 
+						  rows="5"
+						  value={this.state.article}
+	            		  onChange={this.handleChange('article')}
+						  >
+					</textarea>
+					<label for="exampleFormControlFile1"></label>
+					<input 
+						    type="file" 
+						    className = "form-control-file" 
+						    id="exampleFormControlFile1" 
+						    accept="image/*" 
+						    onChange={this.handleChange('photo')}
+						    />
+					<div className = "row d-flex align-items-center">				
+				        <div className = "text-center col-md-12 mt-3 mb-2">
+				          <button 
+				          type="button" 
+				          className = "btn btn-success btn-block btn-rounded z-depth-1"
+				          disabled={this.state.article === '' && typeof this.state.photo == "Object" }
+				          onClick={this.clickPost}
+				          >Send</button>
 				        </div>
 					</div>
 			  </div>
 			</div>
 		</div>
-        );
+	</form>
+     );
     }
 }
 
