@@ -3,9 +3,10 @@ const create = ( credentials, post ) => {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + credentials.t
     },
-    body: post
+  body: JSON.stringify(post)
   }).then((response) => {
     return response.json()
   }).catch((err) => {

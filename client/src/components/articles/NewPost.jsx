@@ -1,43 +1,56 @@
 import React, { Component } from 'react';
 import {create} from './api-article';
 import auth from '../auth/auth-helper';
+import moment from 'moment'
 
 
 class NewPost extends Component {
 	state = {
-		id:10,
+		id: 10,
 		title: '',
 	    article: '',
-	    authorId: '',
-	    createdOn: new Date(),
+	    userid: '',
+	    createdOn: moment(new Date()),
 	    photo: '',
 	    error: ''
 	  }
 
 	  componentDidMount = () => {
 	    this.postData = new FormData()
-	    this.setState({authorId: auth.isAuthenticated().userId})
-	    this.setState({ id: this.state.id + 1 });
+	    this.setState({userid: auth.isAuthenticated().userId})
+	    this.setState({ id: this.state.id + 1 })
 	  }
 
 	  clickPost = () => {
+	  		const articlepost = {
+	  			id: this.state.id,
+			    title: this.state.title,
+			    article: this.state.article,
+			    userid: this.state.userid,
+			    createdOn: this.state.createdOn,
+	
+			}
+				const gifpost = {
+			    title: this.state.title,
+			    photo: this.state.photo,
+			    userid: this.state.userId,
+			    createdOn: this.state.createdOn,
+	
+			}
+
 	    const jwt = auth.isAuthenticated()
-	    create({
-	      userId: jwt.userId
-	    }, {
-	      t: jwt.token
-	    }, this.postData).then((data) => {
+	    create( {t: jwt.token}, articlepost).then((data) => {
 	      if (data.error) {
 	        this.setState({error: data.error})
 	      } else {
 	        this.setState({	title: '',
 						    article: '',
-						    authorId: '',
+						    userid: '',
 						    createdOn: '',
 						    photo: '',
 						    error: ''
 						})
-	        this.props.addUpdate(data)
+	        this.props.addPost(data)
 	      }
 	    })
 	  }
@@ -77,7 +90,7 @@ class NewPost extends Component {
 						    type="file" 
 						    className = "form-control-file" 
 						    id="exampleFormControlFile1" 
-						    accept="image/*" 
+						    accept="image/*"
 						    onChange={this.handleChange('photo')}
 						    />
 					<div className = "row d-flex align-items-center">				
@@ -85,7 +98,7 @@ class NewPost extends Component {
 				          <button 
 				          type="button" 
 				          className = "btn btn-success btn-block btn-rounded z-depth-1"
-				          disabled={this.state.article === '' && typeof this.state.photo == "Object" }
+				          disabled={this.state.article === ''}
 				          onClick={this.clickPost}
 				          >Send</button>
 				        </div>
