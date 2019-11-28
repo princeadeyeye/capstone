@@ -7,10 +7,10 @@ class FeedList extends Component {
         return (
             <div class="card">
 			  {this.props.feed.map((item, i) => {
-            return ( <Post 
-            post={item} 
-            key={i} 
-            onRemove={this.props.removePost}
+                return ( <Post 
+                post={item} 
+                key={i} 
+                onRemove={this.props.removePost}
             />)
           }
          )}

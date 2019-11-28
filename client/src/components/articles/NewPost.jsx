@@ -2,38 +2,30 @@ import React, { Component } from 'react';
 import {create} from './api-article';
 import auth from '../auth/auth-helper';
 import moment from 'moment'
+import { createGif } from '../gifs/api-gifs'
 
 
 class NewPost extends Component {
 	state = {
-		id: 10,
 		title: '',
 	    article: '',
 	    userid: '',
 	    createdOn: moment(new Date()),
-	    photo: '',
+	    photo: null,
 	    error: ''
 	  }
 
 	  componentDidMount = () => {
-	    this.postData = new FormData()
+	    this.postGif = new FormData()
 	    this.setState({userid: auth.isAuthenticated().userId})
-	    this.setState({ id: this.state.id + 1 })
+	    console.log(this.postGif)
 	  }
 
 	  clickPost = () => {
 	  		const articlepost = {
-	  			id: this.state.id,
 			    title: this.state.title,
 			    article: this.state.article,
 			    userid: this.state.userid,
-			    createdOn: this.state.createdOn,
-	
-			}
-				const gifpost = {
-			    title: this.state.title,
-			    photo: this.state.photo,
-			    userid: this.state.userId,
 			    createdOn: this.state.createdOn,
 	
 			}
@@ -54,11 +46,35 @@ class NewPost extends Component {
 	      }
 	    })
 	  }
+
+	 sendGif = () => {
+
+	 	this.postGif.append('photo', this.state.photo, this.state.photo.name);
+	    this.postGif.append('title', this.state.title);
+	    this.postGif.append('userid', this.state.userid);
+
+	    const jwt = auth.isAuthenticated()
+	    createGif( {t: jwt.token}, this.postGif).then((data) => {
+	      if (data.error) {
+	        this.setState({error: data.error})
+	      } else {
+	        this.setState({	title: '',
+						    article: '',
+						    userid: '',
+						    createdOn: '',
+						    photo: '',
+						    error: ''
+						})
+	        this.props.addgif(data)
+	      }
+	    })
+	  }
+
 	  handleChange = name => event => {
 	    const value = name === 'photo'
 	      ? event.target.files[0]
 	      : event.target.value
-	    this.postData.set(name, value)
+	    this.postGif.set(name, value)
 	    this.setState({ [name]: value })
 	  }
     render() {
@@ -93,6 +109,12 @@ class NewPost extends Component {
 						    accept="image/*"
 						    onChange={this.handleChange('photo')}
 						    />
+						    <button 
+				          type="button" 
+				          className = "btn btn-success"
+				          disabled={this.state.photo === null}
+				          onClick={this.sendGif}
+				          >Send</button>
 					<div className = "row d-flex align-items-center">				
 				        <div className = "text-center col-md-12 mt-3 mb-2">
 				          <button 

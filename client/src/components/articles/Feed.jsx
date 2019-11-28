@@ -27,6 +27,11 @@ state = {
     updatefeed.unshift(post)
     this.setState({feed: updatefeed})
   }
+    addgif = (post) => {
+    const updatefeed = this.state.feed
+    updatefeed.unshift(post)
+    this.setState({feed: updatefeed})
+  }
   remove = (post) => {
     const updatefeed = this.state.feed
     const index = updatefeed.indexOf(post)
@@ -39,7 +44,7 @@ state = {
     render() {
         return (
             <div className='card' style={{width: "50rem"}}>
-              <NewPost addPost={this.addPost} />
+              <NewPost addPost={this.addPost} addgif={this.addgif}/>
               <br />
               <FeedList removepost={this.removepost} feed={this.state.feed}/>
             </div>

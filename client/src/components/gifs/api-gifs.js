@@ -1,11 +1,11 @@
-const create = (credentials, post ) => {
+const createGif = ( credentials, post ) => {
   return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs/', {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      'Content-type': 'multipart/form-data',
       'Authorization': 'Bearer ' + credentials.t
     },
-    body: post
+  body: (post)
   }).then((response) => {
     return response.json()
   }).catch((err) => {
@@ -54,21 +54,6 @@ const remove = (params, credentials) => {
   })
 }
 
-const search = (params, credentials, postId) => {
-  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs/?' + query.postId, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + credentials.t
-    },
-    body: JSON.stringify({userId:params.userId, postId: postId})
-  }).then((response) => {
-    return response.json()
-  }).catch((err) => {
-    console.log(err)
-  })
-}
 
 
 const comment = (params, credentials, postId, comment) => {
@@ -113,9 +98,11 @@ const list = () => {
 }
 
 export {
-  create,
+  createGif,
   remove,
   read,
   comment,
   list,
+  update,
+  feeds
 }

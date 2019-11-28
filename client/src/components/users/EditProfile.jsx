@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import auth from '../auth/auth-helper'
 import {read, update} from './api-users'
-import {Link, Redirect} from 'react-router-dom'
+import { Redirect} from 'react-router-dom'
 
 class EditProfile extends Component {
   

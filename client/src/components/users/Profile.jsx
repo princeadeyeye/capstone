@@ -3,7 +3,6 @@ import auth from '../auth/auth-helper'
 import {read} from './api-users'
 import {Link} from 'react-router-dom'
 import Feed from '../articles/Feed'
-import EditProfile from './EditProfile'
 
 class Profile extends Component {
 

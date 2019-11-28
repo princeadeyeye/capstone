@@ -32,14 +32,25 @@ class Post extends Component {
   }
     render() {
     	return (
-	    			<div class="card" style={{width: "18rem"}}>
-	    			  <div class="card-body">
-	    			    <h5 class="card-title">{this.props.post.title}</h5>
-	    			    <p class="card-text">{this.props.post.article}</p>
-	    			    <p class="card-text">{this.props.post.authorId}</p>
-	    			    <a href="/" class="btn btn-primary">{this.props.post.authorId}</a>
-	    			  </div>
-	    			</div>
+            <div className="card">
+              <img className="card-img-top" style={{width:"8rem", height:"8rem"}} src={this.props.post.article} alt={this.props.post.articleid}/>
+              <div className="card-body">
+                <h5 className="card-title">{this.props.post.title}</h5>
+                <p className="card-text">{this.props.post.article}</p>
+              </div>
+              <ul className="list-group list-group-flush ">
+                <li className="list-group-item">ArticleId: {this.props.post.articleid}</li>
+                <li className="list-group-item">AuthorId: {this.props.post.userid}</li>
+                <li className="list-group-item">CreatedOn: {this.props.post.createdon}</li>
+              </ul>
+              <div className="card-body">
+                <a href="/" className="card-link">View Article</a>
+                <a href="/" className="card-link">Delete Article</a>
+                <a href="/" className="card-link">Add comment</a>
+              </div>
+              <br />
+              <hr />
+          </div>
     	);
         
     }
