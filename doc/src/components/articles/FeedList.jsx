@@ -10,7 +10,7 @@ class FeedList extends Component {
                 return ( <Post 
                 post={item} 
                 key={i} 
-                onRemove={this.props.removePost}
+                remove={this.props.remove}
             />)
           }
          )}

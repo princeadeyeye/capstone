@@ -1,11 +1,11 @@
-const createGif = ( credentials, post ) => {
-  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs/', {
+const createGif = ( credentials, formData ) => {
+  return fetch('https://adeyeyeteamwork.herokuapp.com/api/v1/gifs', {
     method: 'POST',
     headers: {
       'Content-type': 'multipart/form-data',
       'Authorization': 'Bearer ' + credentials.t
     },
-  body: (post)
+  body: formData
   }).then((response) => {
     return response.json()
   }).catch((err) => {

@@ -18,7 +18,6 @@ class NewPost extends Component {
 	  componentDidMount = () => {
 	    this.postGif = new FormData()
 	    this.setState({userid: auth.isAuthenticated().userId})
-	    console.log(this.postGif)
 	  }
 
 	  clickPost = () => {
@@ -39,7 +38,6 @@ class NewPost extends Component {
 						    article: '',
 						    userid: '',
 						    createdOn: '',
-						    photo: '',
 						    error: ''
 						})
 	        this.props.addPost(data)
@@ -48,10 +46,6 @@ class NewPost extends Component {
 	  }
 
 	 sendGif = () => {
-
-	 	this.postGif.append('photo', this.state.photo, this.state.photo.name);
-	    this.postGif.append('title', this.state.title);
-	    this.postGif.append('userid', this.state.userid);
 
 	    const jwt = auth.isAuthenticated()
 	    createGif( {t: jwt.token}, this.postGif).then((data) => {
@@ -74,9 +68,14 @@ class NewPost extends Component {
 	    const value = name === 'photo'
 	      ? event.target.files[0]
 	      : event.target.value
+	      console.log(value, this.state.userid)
 	    this.postGif.set(name, value)
+	    this.postGif.append("photo", value);
+	    this.postGif.append('userid', this.state.userid);
+	    console.log(this.postGif)
 	    this.setState({ [name]: value })
 	  }
+
     render() {
         return (
       	<form>

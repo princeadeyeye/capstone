@@ -46,7 +46,7 @@ state = {
             <div className='card' style={{width: "50rem"}}>
               <NewPost addPost={this.addPost} addgif={this.addgif}/>
               <br />
-              <FeedList removepost={this.removepost} feed={this.state.feed}/>
+              <FeedList remove={this.remove} feed={this.state.feed}/>
             </div>
         );
     }

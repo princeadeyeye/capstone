@@ -20,13 +20,13 @@ class Post extends Component {
   deletePost = () => {
     const jwt = auth.isAuthenticated()
     remove({
-      postId: this.props.post.userId
+      postId: this.props.post.articleid
     }, {
       t: jwt.token
     }).then((data) => {
       if (data.error) {
       } else {
-        this.props.onRemove(this.props.post)
+        this.props.remove(this.props.post)
       }
     })
   }
@@ -45,7 +45,7 @@ class Post extends Component {
               </ul>
               <div className="card-body">
                 <a href="/" className="card-link">View Article</a>
-                <a href="/" className="card-link">Delete Article</a>
+                <button onClick={this.deletePost} className="card-link">Delete Article</button>
                 <a href="/" className="card-link">Add comment</a>
               </div>
               <br />

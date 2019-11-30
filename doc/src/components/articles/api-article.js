@@ -6,7 +6,7 @@ const create = ( credentials, post ) => {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + credentials.t
     },
-  body: JSON.stringify(post)
+  body: (post)
   }).then((response) => {
     return response.json()
   }).catch((err) => {
