@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {remove} from './api-article';
 import auth from '../auth/auth-helper';
-
+import {Link} from 'react-router-dom';
 class Post extends Component {
 	state = {
-		comments: []
+		comments: [],
+    article : {}
 	}
 
 	  componentDidMount = () => {
@@ -33,7 +34,7 @@ class Post extends Component {
     render() {
     	return (
             <div className="card">
-              <img className="card-img-top" style={{width:"8rem", height:"8rem"}} src={this.props.post.article} alt={this.props.post.articleid}/>
+              <img className="card-img-top" style={{width:"8em", height:"8em"}} src={this.props.post.article} alt={this.props.post.articleid}/>
               <div className="card-body">
                 <h5 className="card-title">{this.props.post.title}</h5>
                 <p className="card-text">{this.props.post.article}</p>
@@ -44,7 +45,12 @@ class Post extends Component {
                 <li className="list-group-item">CreatedOn: {this.props.post.createdon}</li>
               </ul>
               <div className="card-body">
-                <a href="/" className="card-link">View Article</a>
+                <Link 
+                to = {"/articles/" + this.props.post.articleid} 
+                className="card-link" 
+                >
+                View Article
+                </Link>
                 <button onClick={this.deletePost} className="card-link">Delete Article</button>
                 <a href="/" className="card-link">Add comment</a>
               </div>

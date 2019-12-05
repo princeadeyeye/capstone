@@ -5,6 +5,7 @@ import Navigation from './components/main/Navigation'
 import Signin from './components/auth/Signin'
 import Register from './components/auth/Register'
 import Article from './components/articles/Article'
+import GetArticle from './components/articles/GetArticle'
 import Feed from './components/articles/Feed'
 import Profile from './components/users/Profile'
 import EditProfile from './components/users/EditProfile'
@@ -25,7 +26,7 @@ class Router extends Component {
 	      			<Route exact path = "/profile/:id" component = {Profile} />
 	      			<Route exact path = "/feed" component = {Feed} />
 	      			<PrivateRoute exact path="/profile/edit/:id" component={EditProfile}/>
-
+	      			<Route exact path = "/articles/:id" component = {GetArticle} />
 	      			{/*<Route exact path = "/" component = {Feed} />
 	      			<Route exact path = "/" component = {ShowArticle} />
 	      			<Route exact path = "/" component = {ShowGif} />
