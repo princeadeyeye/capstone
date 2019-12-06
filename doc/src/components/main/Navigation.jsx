@@ -1,76 +1,52 @@
 import React, { Component } from 'react';
 import './Navigation.css'
+import { NavLink } from 'react-router-dom'
+
 
 class Navigation extends Component {
   
     render() {
         return (
-		  <div>
-		    <div class="container">
-		      <div class="html-section">
-		        <div class="html-project">
-		          <div class="navigation">
-		            <nav>
-		              <ul class="nav-type">
-		                <li><a href="/" class="active">Home</a></li>
-		                <li><a href="/" class="active1">About</a></li>
-		                <li><a href="/" class="active2">Contact</a></li>
-		                <li><a href="/" class="active3">Support</a></li>
-		                <div class="line"></div>
-		               
-		              </ul>
-		            </nav>
-		          </div>
-		        </div>
-		      </div>
-		      <noscript>
-		      <div class="first-line">
-		        <div class="linear">
-		          <div class="line-w5">
-		            
-		          </div>
-		        </div>
-		      </div>
-		      </noscript>
-			<template>
-		      <div class="flash-fluid">
-		        <div class="flash-time">
-		          <div class="flash-GIF">
-		            
-		          </div>
-		        </div>
-		       </div>
-			</template>
-			<noscript>     
-		      <div class="cyrcle-center">
-		        <div class="radial-cyrcle">
-		        </div>
-		      </div>
-			</noscript>
-		    </div>
-			<template>   
-		    <div class="text-class">
-		      <div class="text-container">
-		        <div class="text-content-fluid" id="chinese-text" data-text-type="chinese">
-		          <div class="chinese-text">設</div>
-		          <div class="chinese-text2">計</div>
-		          <div class="chinese-text3">和</div>
-		          <div class="chinese-text4">開</div>
-		          <div class="chinese-text5">發</div>
-		        </div>
-		      </div>
-		    </div>
-			</template>  
-		    
-		    <div class="dropdown" id="anotherFunction">
-		     <div class="drop1">HTML</div>
-		      <div class="drop2">CSS</div>
-		      <div class="drop3">Javascript</div>
-		      <div class="drop4">Sass</div>
-		    </div>
+		  <header id="header">
+      <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
 
-		 </div>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <NavLink class="navbar-brand" to="/"><img src="images/logo.png" alt="logo" /></NavLink>
+          </div>
 
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right main-menu">
+              <li class="dropdown">
+                <NavLink to="/" >Home </NavLink>
+              </li>
+              <li class="dropdown">
+                <NavLink to="/feed">Feed </NavLink>
+              </li>
+              <li class="dropdown">
+                <NavLink to="/articles">Articles </NavLink>
+              </li>
+              <li class="dropdown">
+                <NavLink to="/gifs">Gifs </NavLink>
+              </li>
+              <li class="dropdown"><NavLink to="/contact">Contact</NavLink></li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-sm">
+              <div class="form-group">
+                <i class="icon ion-android-search"></i>
+                <input type="text" class="form-control" placeholder="Search Articles" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
         );
     }
 }

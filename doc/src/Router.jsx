@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Homepage from './components/main/Homepage'
 import Navigation from './components/main/Navigation'
+import Footer from './components/main/Footer'
 import Signin from './components/auth/Signin'
 import Register from './components/auth/Register'
 import Article from './components/articles/Article'
@@ -17,11 +18,11 @@ class Router extends Component {
     render() {
         return (
         	<div>
+        	<Route  path = "/" component = {Navigation} />
         		<Switch>
 	      			<Route exact path = "/" component = {Homepage} />
 	      			<Route exact path = "/signin" component = {Signin} />
 	      			<Route exact path = "/register" component = {Register} />
-	      			<Route exact path = "/navigation" component = {Navigation} />
 	      			<Route exact path = "/articles" component = {Article} />
 	      			<Route exact path = "/profile/:id" component = {Profile} />
 	      			<Route exact path = "/feed" component = {Feed} />

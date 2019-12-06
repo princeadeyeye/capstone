@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Homepage.css'
+import './Navigation.css'
 import {signin} from '../auth/api-auth';
 import auth from '../auth/auth-helper';
 import { Redirect } from 'react-router-dom'
@@ -36,7 +36,7 @@ clickSubmit = (event) => {
 
 	signin(user)
 		.then(({data}) => {
-			if(data.error || undefined) {
+			if(data.error) {
 				this.setState({ error: data.error})
 			} else {
 				auth.authenticate(data, () => {
@@ -57,73 +57,66 @@ handleChange = name => event => {
 		      return (<Redirect to={"/profile/" + userId}/>)
 		    }
         return (
-        		<div className="main-bg">
-			        <div className="box-conatiner">
-			            <div id="a">
-			                <div className="circle-ripple"></div>
-			            </div>
+		    <div id="lp-register">
+		    	<div class="container wrapper">
+		        <div class="row">
+		        	<div class="col-sm-5">
+		            <div class="intro-texts">
+		            	<h1 class="text-white">TeamWork !!!</h1>
+		            	<p>Teamwork is an internal social network for employees of an organization. The goal of this
+		application is to facilitate more interaction between colleagues and promote team bonding.</p>
+		              
+		            </div>
+		          </div>
+		        	<div class="col-sm-6 col-sm-offset-1">
+		            <div> 
+		               <section id="banner">
+		                  <div class="container">
+		                    <div class="sign-up-form">
+		                      <h2 class="text-white">Login </h2>
+		                      <div class="line-divider"></div>
+		                      <div class="form-wrapper">
+		                        <p class="signup-text">Signin your account to read and share articles <br /> Learn and Relearn
+		                        </p>
+		                        <form action="#">
+		                          <fieldset class="form-group">
+		                            <input 
+		                            	type="email" 
+		                            	class="form-control" 
+		                            	id="example-email" 
+		                            	placeholder="Email" 
+		                            	name="email" 
+        					            value={this.state.email}
+        					            onChange={this.handleChange('email')}
+		                            	/>
+		                          </fieldset>
+		                          <fieldset class="form-group">
+		                            <input 
+		                            	type="password" 
+		                            	class="form-control" 
+		                            	id="example-password" 
+		                            	placeholder="Password"
+        					            value={this.state.password}
+        					            onChange={this.handleChange('password')}
+		                            	 />
+		                          </fieldset>
+		                        </form>
+		                        { this.state.error && (<div class="alert alert-danger" role="alert">
+		                        	{this.state.error} </div>) }
+		                        <button 
+		                        class="btn-secondary"
+		                        onClick={this.clickSubmit}
+		                        >Signin</button>
+		                      </div>
+		                    </div>
+		                  </div>
+		               </section>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
 
-			            <div className="row">
-			                <div className="col-md-6 col-sm-6">
-			                    <h1 className="heading-left">TeamWork </h1>
-			                </div>
-			                <div className="col-sm-6 col-md-6">
-			                    <div className="wrap-login100">
-			                        <span className="login100-form-title">
-			                            Sign In
-			                        </span>
-			                        <form className="login100-form validate-form p-l-55 p-r-55 p-t-20">
-			                           
-			                            <div className="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-			                                <input 
-			                                className="input100" 
-			                                type="text" name="email" 
-			                                placeholder="Email" 
-			                                value={this.state.email}
-			                                onChange={this.handleChange('email')}
-			                                />
-			                                <span className="focus-input100"></span>
-			                            </div>
-			                            <div className="wrap-input100 validate-input" data-validate="Please enter password">
-			                                <input className="input100" 
-			                                type="password" 
-			                                placeholder="Password" 
-			                                value={this.state.password}
-			                                onChange={this.handleChange('password')}
-			                                />
-			                                <span className="focus-input100"></span>
-			                            </div>
-			                            { this.state.error &&
-			                            	(<div class="alert alert-danger" role="alert">
-			                            	 	{this.state.error}
-			                            	</div>)
-			                            }
-			                            
-			                            <br />
-			                          
-			                            <div className="container-login100-form-btn">
-			                                <button 
-			                                className="login100-form-btn"
-			                                onClick={this.clickSubmit}
-			                                >
-			                                    Sign in
-			                                </button>
-			                            </div>
-			                            <div className="flex-col-c p-t-110 p-b-40">
-			                                <span className="txt1 p-b-9">
-			                                    Don’t have an account?
-			                                </span>
-			                                <a href="/" className="txt3">
-			                                    Sign up now
-			                                </a>
-			                            </div>
-			                        </form>
-			                    </div>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-            
         );
     }
 }
