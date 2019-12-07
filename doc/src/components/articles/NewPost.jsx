@@ -30,7 +30,7 @@ class NewPost extends Component {
 			}
 
 	    const jwt = auth.isAuthenticated()
-	    create( {t: jwt.token}, articlepost).then((data) => {
+	    create( {t: jwt.token}, articlepost).then(({data}) => {
 	      if (data.error) {
 	        this.setState({error: data.error})
 	      } else {
@@ -46,7 +46,6 @@ class NewPost extends Component {
 	  }
 
 	 sendGif = () => {
-
 	    const jwt = auth.isAuthenticated()
 	    createGif( {t: jwt.token}, this.postGif).then((data) => {
 	      if (data.error) {
@@ -78,57 +77,69 @@ class NewPost extends Component {
 
     render() {
         return (
-      	<form>
-          <div className = "media">
-			  <img className = "d-flex rounded-circle avatar z-depth-1-half mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
-			    alt="Avatar" />
-			  <div className = "media-body">
-			    <h5 className = "mt-0 font-weight-bold blue-text">Anna Smith</h5>
-			    <div className = "md-form amber-textarea active-amber-textarea">
-				    <input 
-				    	className="form-control form-control-sm" 
-				    	type="text" 
-				    	placeholder="title" 
-				    	value={this.state.title}
-	            		 onChange={this.handleChange('title')}
-				    	/>
-					<textarea   
-						  id="form22" 
-						  className = "md-textarea form-control" 
-						  rows="5"
-						  value={this.state.article}
-	            		  onChange={this.handleChange('article')}
-						  >
-					</textarea>
-					<label for="exampleFormControlFile1"></label>
-					<input 
-						    type="file" 
-						    className = "form-control-file" 
-						    id="exampleFormControlFile1" 
-						    accept="image/*"
-						    onChange={this.handleChange('photo')}
-						    />
-						    <button 
-				          type="button" 
-				          className = "btn btn-success"
-				          disabled={this.state.photo === null}
-				          onClick={this.sendGif}
-				          >Send</button>
-					<div className = "row d-flex align-items-center">				
-				        <div className = "text-center col-md-12 mt-3 mb-2">
-				          <button 
-				          type="button" 
-				          className = "btn btn-success btn-block btn-rounded z-depth-1"
-				          disabled={this.state.article === ''}
-				          onClick={this.clickPost}
-				          >Send</button>
-				        </div>
-					</div>
-			  </div>
-			</div>
-		</div>
-	</form>
-     );
+
+        	 <div class="create-post">
+	                <div class="row">
+	                	<div class="col-md-10">
+	                		<input 
+								className="form-control form-control-sm" 
+								type="text" 
+								placeholder="title" 
+								value={this.state.title}
+					         	onChange={this.handleChange('title')}
+							/>
+	                	</div>
+	                </div>
+	              <div class="row">
+                   <div class="col-md-10">
+                            <div class="form-group">
+                              <img src={require ("../../images/face.jpg")} alt="" class="profile-photo-md" />
+	                            <textarea 
+	                            	name="article" 
+	                            	id="exampleTextarea" 
+	                            	cols="30" rows="5" 
+	                            	class="form-control" 
+	                            	placeholder="Write what you wish"
+	                            	value={this.state.article}
+	            		 	 		onChange={this.handleChange('article')}
+
+	                              >
+	                             </textarea>
+	                            
+                            </div>
+                          </div>
+                        </div>
+                          <div class="row">
+		                	<div class="col-md-10 col-sm-3">
+		                		  <input 
+		                                class="form-control btn btn-primary" 
+		                                type="file" 
+								    	accept="image/*"
+								    	onChange={this.handleChange('photo')}
+	                                />
+		                	</div>
+                        </div>
+                        <div class='row'>
+                          <div class="col-md-5 col-sm-5">
+                            <div class="tools">
+                              <ul class="publishing-tools">
+	                             <button 
+	                              class="btn btn-primary"
+	                                disabled={this.state.photo === null}
+				          			onClick={this.sendGif}
+	                              >upload</button>
+                              </ul>
+                              <button 
+                              class="btn btn-primary"
+                               disabled={this.state.article === ''}
+				          		onClick={this.clickPost}
+                              >Publish</button>
+                        </div>
+                     </div>
+                </div>
+            </div>
+      	
+     	);
     }
 }
 

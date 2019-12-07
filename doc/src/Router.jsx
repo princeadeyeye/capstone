@@ -34,6 +34,7 @@ class Router extends Component {
 	      			<Route exact path = "/" component = {CommentArticle} />
 	      			<Route exact path = "/" component = {CommentGif} />*/}
       			</Switch>
+      			<Route  path = "/" component = {Footer} />
         	</div>
         );
     }

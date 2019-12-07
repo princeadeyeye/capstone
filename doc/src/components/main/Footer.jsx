@@ -6,11 +6,11 @@ class Footer extends Component {
 
     render() {
        return (
-		    <footer >
-		      <div class="copyright">
-		        <p>Adeyeye Muiz © 2019. All rights reserved</p>
-		      </div>
-		    </footer>
+		   <footer id="footer">
+	      <div class="bottom">
+	        <p>Adeyeye Muiz © 2019</p>
+	      </div>
+	    </footer>
             
         );
     }

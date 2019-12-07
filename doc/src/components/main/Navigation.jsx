@@ -18,7 +18,7 @@ class Navigation extends Component {
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <NavLink class="navbar-brand" to="/"><img src="images/logo.png" alt="logo" /></NavLink>
+            <NavLink class="navbar-brand" to="/"><img src={require ("../../images/logo.png")} alt="logo" /></NavLink>
           </div>
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import auth from '../auth/auth-helper'
 import {read} from './api-users'
-import {Link} from 'react-router-dom'
 import Feed from '../articles/Feed'
+import TimelineCover from './TimelineCover'
 
 class Profile extends Component {
 
@@ -42,33 +42,23 @@ componentWillReceiveProps = (props) => {
     render() {
       const {user} = this.state
         return (
-          <div className='container mt-5'>
-          <div className='row'>
-            <div className="col jumbotron bg-primary">
-              <h1 className="display-4 text-uppercase"> {user.firstName} {user.lastName}</h1>
-              <Link to={'/profile/edit/' + user.userId} type="button" className="btn btn-primary" aria-label="right Align">
-                <i className="fa fa-edit"></i>
-              </Link>
-              <p className="lead text-white">Email: {user.email}</p>
-              <p className="lead text-white">Role: {user.jobRole}</p>
-              <p className="lead text-white">Department: {user.department}</p>
-              <p className="lead text-white">Address: {user.address}</p>
-              <hr className="my-4" />
-               
-             { 
-              (user.jobRole === 'admin') &&
-            ( <div className='row '>
-                <Link className="m-auto btn btn-primary btn-lg text-uppercase" to="/register" role="button">Add Employee</Link>
-                </div>)}
-            <div className='row '>
-                <Link className="m-auto btn btn-primary btn-lg text-uppercase" to="/feed" role="button">Feed</Link>
+            <div class="container">
+              <div class="timeline">
+               <TimelineCover user = {user} />
+                <div id="page-contents">
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-7">
+                    <Feed />
+                    </div>
+                    <div class="col-md-2 static">
+                      <div id="sticky-sidebar">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            </div>
-          </div>
-          <div className='row text-black'>
-            <Feed />
-          </div>
-        </div>
         );
     }
 }

@@ -12,14 +12,15 @@ state = {
     error: '',
     redirectToReferrer: false,
     userId: '',
-    defaultPage: true
+    defaultPage: true, 
+    loading: true
 }
 
 init = () => {
 	if(auth.isAuthenticated()) {
-		this.setState({ defaultPage: false})
+		this.setState({ defaultPage: false, loading: false})
 	} else {
-		this.setState({ defaultPage: true})
+		this.setState({ defaultPage: true, loading: false})
 	}
 }
 componentWillReceiveProps = () => {
@@ -40,7 +41,7 @@ clickSubmit = (event) => {
 				this.setState({ error: data.error})
 			} else {
 				auth.authenticate(data, () => {
-					this.setState({ redirectToReferrer: true, userId: data.userId})
+					this.setState({ redirectToReferrer: true, userId: data.userId, loading: false})
 				})
 			}
 		})
@@ -53,6 +54,14 @@ handleChange = name => event => {
     render() {
   		const {userId} = this.state
   		 const {redirectToReferrer} = this.state
+  		  const {loading} = this.state
+  		 if(loading) {
+    		return ( 
+				    <div id="spinner-wrapper">
+				      <div class="spinner"></div>
+				    </div>
+    )
+    	}
 		    if (redirectToReferrer) {
 		      return (<Redirect to={"/profile/" + userId}/>)
 		    }

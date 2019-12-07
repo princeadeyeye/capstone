@@ -359,10 +359,10 @@ textarea{
 }
 
 .menu{
-  background: #231F20;
+  background: #051758;
   border: none;
   border-radius: 0;
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
 .menu form{
@@ -1057,7 +1057,7 @@ ul.online-users li span.online-dot{
 }
 
 .create-post .form-group{
-  margin-bottom: 0;
+  margin-bottom: 5px;
   display: inline-flex;
 }
 
@@ -1072,6 +1072,7 @@ ul.online-users li span.online-dot{
 
 .create-post .tools{
   padding: 8px 0 10px;
+
 }
 
 .create-post .tools ul.publishing-tools{
@@ -2130,9 +2131,7 @@ input:checked + .slider:before{
   ==================================================*/
 
 #footer{
-  background: #7a97ef;
-  position: fixed;
-  bottom: 0;
+
 }
 
 #footer::before{
@@ -2210,14 +2209,19 @@ ul.contact li i{
   color: #27AAE1;
 }
 
-.copyright{
-  background: #231F20;
+.bottom{
+  background: #051758;
   text-align: center;
   color: #fff;
   padding: 12px 0 4px;
   position: fixed;
   bottom: 0;
   width: 100%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  z-index: 1030;
 }
 
 
